@@ -1,4 +1,4 @@
-# [COVID-19 Tracker](https://world19covid.web.app/)
+# COVID-19 Tracker (Major Project)
 
 This Application aims to show the numbers & trends of people affected, recovered and deceased due to COVID-19 in India and perform Covid tests by analysing X-Ray Reports.
 
