@@ -4,6 +4,7 @@ import Dropzone from "react-dropzone";
 import styles from "./App.module.css";
 import { fetchData } from "./api";
 import coronaImage from "./images/image.png";
+import axios from "axios";
 
 class App extends React.Component {
   state = {
@@ -14,8 +15,14 @@ class App extends React.Component {
     this.setState({ data: fetchedData });
   }
   
-  handleDrop(acceptedFiles){
-    console.log("Yo")
+  async handleDrop(acceptedFiles){
+    let file = acceptedFiles[0];
+    const data = new FormData()
+    data.append('file', file)
+    let res = await axios.post('/getresult', data);
+	  //console.log(file);
+    console.log(res);
+    alert("You are Covid "+ res.data.covid);
   }
   
   render() {
