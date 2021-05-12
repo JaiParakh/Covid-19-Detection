@@ -17,9 +17,13 @@ app.post('/getresults', async (req, res) => {
     let dat = data.filter(da => da.name === req.body.file)[0];
     let process = spawn('python', ["./main.py", "./python/video/"+dat.name, dat.coords[0], dat.coords[1], dat.coords[2], dat.coords[3]]);
     process.stdout.on('data', function(data){
-        if(data === "done"){
+        if("done" === JSON.parse(data.toString()).msg){
             return res.json({ success: true });
         }
+    });
+    process.stdout.on("error", function(err){
+        console.log(err);
+        return res.json({success: false, msg:"Error Occured"});
     });
 });
 
