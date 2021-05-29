@@ -15,25 +15,33 @@ import VideoPlayer from './VideoPlayer';
 export default function FormDialog(props) {
 
     const [vid, setVid] = React.useState(false);
+    const [vidPath, setVidPath] = React.useState("");
     const [load, setLoad] = React.useState(false);
-    const showVid = () => {
+
+    const showVid = (path) => {
+        setVidPath(path)
         setVid(true);
         console.log(vid)
     }
+
     const getResults = () => {
-        setLoad(true);
         axios.post('/getresults', {
             file: props.fileName
         }).then(re => {
-            console.log(re.data);
-            showVid();
+            setLoad(true);
+            setTimeout(() => {
+                setLoad(false);
+                console.log(re.data);
+                showVid(re.data.output);
+            }, 10000)
         }).catch(err => console.log(err));
     }
+    if(load){
+        return <div style={{zIndex: 230, position: 'absolute', marginLeft: 'auto', marginRight: 'auto', left: 0, right: 0, textAlign: 'center'}}><CircularProgress color="inherit" /></div>
+    }
     if(vid){
-        let path = "/"+props.fileName;
-        if(load){
-            return <CircularProgress color="inherit" />
-        }
+        let path = "/videos/" + vidPath;
+        
         return (
             <div>
                 <Dialog open={props.show} onClose={props.handleClose} aria-labelledby="form-dialog-title" maxWidth='lg' >
@@ -62,6 +70,6 @@ export default function FormDialog(props) {
                     </DialogActions>
                 </Dialog>
             </div>
-          );
+        );
     }
 }

@@ -1,5 +1,7 @@
 const data = [{
-    name: "Video File name with extension",
-    coords: ["234,567","234,567","234,567","234,567"]
+    name: "PETS2009.avi",
+    img: "img-1.png",
+    outputVideo: "video.mp4"
 }]
+
 module.exports = data;

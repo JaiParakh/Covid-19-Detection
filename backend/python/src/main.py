@@ -52,7 +52,10 @@ blank_image = np.zeros((height,width,3), np.uint8)
 #cv2.imwrite("../img/chemin_1.png", imgOutput)
 
 # done = social_distanciation_video_detection.run(video_path)
-# print(done)
+x = {
+    "msg": "done" 
+}
+print(json.dumps(x))
 
 
 
